@@ -176,3 +176,87 @@ insert into users values(null,'om','o123','om@gmail.com','male',945214578,'150 f
  delete from users where uid between 1 and 5;
 
  ```
+
+
+# SQL functions ? 
+1. sql function are inbuilt function 
+
+# types of SQL function 
+
+1. aggrigate function
+   - max()
+   - min()
+   - avg()
+   - sum()
+   - count()
+2. scalar function
+
+   - first()
+   - last()
+   - lcase()
+   - ucase()
+
+**examples of sql function**
+
+1. select max(salary) as max_salary from employee;
+2. select min(salary) as min_salary from employee;
+3. select avg(salary) as avg_salary from employee;
+4. select sum(salary) as sum_salary from employee;
+5. select count(empid) as total_employees from employee;
+6. select first(empid) from employee;
+7. select last(empid) from employee;
+8. select lcase(name) from employee;
+9. select ucase(name) from employee;
+
+
+# sql subquery : 
+
+ 1. query within another query i.e called subquery
+ 2. subquery should multiple 
+
+**examples of subquery**
+
+```
+select max(salary) as second_highest_salary from employee where salary < (select max(salary) from employee)
+
+```
+
+# difference b/w order by & group by 
+
+# order by :
+1. order by filter data in acsending order and desending order
+
+**examples**
+
+```
+select * from employee order by name asc;
+or
+select * from employee order by name desc;
+
+```
+
+# group by :
+
+1. filter data on group of columns there we applied group by  
+
+**examples**
+
+```
+select sum(salary), department from employee group by department;
+```
+
+# group by with having clause ?
+
+1. having clause always work after group by 
+2. having does not work before group and after where
+
+**examples**
+
+```
+select sum(salary), department from employee group by department HAVING AVG(age) > 25;
+or
+SELECT SUM(salary) AS total_salary, department
+FROM employee
+GROUP BY department
+HAVING AVG(age) > 25;
+```
