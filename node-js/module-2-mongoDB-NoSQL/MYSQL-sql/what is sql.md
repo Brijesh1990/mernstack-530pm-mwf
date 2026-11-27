@@ -260,3 +260,130 @@ FROM employee
 GROUP BY department
 HAVING AVG(age) > 25;
 ```
+
+# key constraints in SQL :
+
+1. set limitation on sql via provide  pk | fk | uk 
+2. pk is auto_increment and set once time in a tables 
+3. fk is used to provides relationship b/w tables
+4. uk is used to never return a duplicate values
+
+# how create pk ? 
+
+1. A pk never return a null values 
+2. A pk key should be always auto_increment
+3. A pk always assign once time in a tables 
+
+```
+create table country
+(
+cid int AUTO_INCREMENT primary key,
+cname varchar(255)    
+)
+```
+
+
+# how create uk ? 
+
+1. A uk  return once time  null values 
+2. A uk never return or stored a duplicate data
+3. A uk assign more than once  time in a tables 
+
+
+```
+create table customers
+(
+custid int AUTO_INCREMENT primary key,
+name varchar(255),
+email varchar(255),
+mobile bigint,
+address text    
+)
+
+or
+
+alter table customers add unique key(`email`)
+
+```
+
+# how create fk ? 
+
+1. A fk is used for provides relationship in tables  
+2. A fk stored a duplicate data
+3. A fk assign more than once  time in a tables 
+4. A fk is used to provides relationship b/w tables with common field used for join tables 
+
+```
+create table state
+(
+sid int AUTO_INCREMENT primary key,
+sname varchar(255),
+cid int,    
+CONSTRAINT fk_state_country    
+FOREIGN key(cid) REFERENCES country(cid)     
+)
+
+or
+
+create table city
+(
+ctid int AUTO_INCREMENT primary key,
+ctname varchar(255),
+sid int,    
+CONSTRAINT fk_city_state    
+FOREIGN key(sid) REFERENCES state(sid)     
+)
+
+or
+
+create table users
+(
+uid int AUTO_INCREMENT primary key,
+name varchar(255),
+email varchar(255),
+password varchar(255),
+mobile bigint,
+    
+cid int,    
+CONSTRAINT fk_country    
+FOREIGN key(cid) REFERENCES country(cid),         
+    
+sid int,    
+CONSTRAINT fk_state    
+FOREIGN key(sid) REFERENCES state(sid),
+    
+
+ctid int,    
+CONSTRAINT fk_city    
+FOREIGN key(ctid) REFERENCES city(ctid),
+    
+address text
+)
+
+
+```
+
+# SQL join ? 
+
+1. sql join are used to join more than one tables with common field if data matched from one tables to another tables join the data.
+
+2. SQL join are used to joined matched data from one tables to another tables 
+
+# types of join ? 
+
+1. join 
+2. inner join 
+3. outer join 
+   - left join 
+   - right join 
+   - full join 
+4. cross join 
+5. union join 
+
+**examples of join**
+
+```
+
+select users.*, cname , sname , ctname from users join country on users.cid=country.cid join state on users.sid=state.sid join city on users.ctid=city.ctid;
+
+```
